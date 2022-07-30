@@ -55,10 +55,18 @@
 ### Environment Setup
 1. Create and activate a new virtual enviornment
 ```
-# IF USING THIRD-PARTY PACKAGES, USE A NEW ENV:
 conda create -n shopping-env python=3.8 
+```
+2. Activate virtual environment
+```
 conda activate shopping-env
-pip install -r requirements.txt # (after specifying desired packages inside)
+```
+3. If you're using third-party packages, use a new environment
+```
+pip install -r requirements.txt
+```
+4. Install pandas
+```
 pip install pandas 
 
 ```

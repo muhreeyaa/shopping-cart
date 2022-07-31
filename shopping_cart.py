@@ -1,4 +1,9 @@
 # shopping_cart.py
+import pandas as pd
+import pandas 
+from pandas import read_csv
+
+products_df = read_csv("products.csv") 
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -40,3 +45,58 @@ def to_usd(my_price):
 # TODO: write some Python code here to produce the desired output
 
 print(products)
+import os
+from dotenv import load_dotenv
+
+load_dotenv() #> invoking this function loads contents of the ".env" file into the script's environment...
+
+# ... where they can be accessed / read via the os module as usual:
+print(os.getenv("SECRET_MESSAGE"))
+
+# USER INPUT
+while True:    
+    product_id = input("Please input a product identifier ID of your product or 'done' when you are done.")
+    if product_id in valid_id_list:
+        product_id_list.append(product_id)
+elif product_id.lower() == "done":    
+        active = False
+        #break
+    else:
+        print("Please input a product identifiedr ID of your product or 'done' when you are done.")
+
+if product_id not in valid_id_lit:
+    print("Oops that was an invalid product ID, please try again")
+    exit() # quit 
+
+#After the clerk indicates there are no more items, the program should print a custom receipt on the screen. 
+# The receipt should include the following components:
+# 1. A grocery store name of your choice
+print("Welcome to Whole Foods")
+print("-----------------")
+# 2. A grocery store phone number and/or website URL and/or address of choice
+print("292 Ashland Pl, Brooklyn, NY 11217")
+print(" (718) 290-1010")
+print("-----------------")
+
+# 3. The date and time of the beginning of the checkout process, 
+# #formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
+
+import time
+import datetime
+#importing for timestamp
+x = datetime.datetime.now()
+
+# 4. The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $3.50, etc.)
+# 5. The total cost of all shopping cart items (i.e. the "subtotal"), formatted as US dollars and cents (e.g. $19.47), 
+# calculated as the sum of their prices
+# 6. The total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount 
+# of tax owed plus the total cost of all shopping cart items
+TAX_RATE=0.0875
+
+# 7. A friendly message thanking the customer and/or encouraging the customer to shop again
+print("-----------------")
+print("Thanks for shopping with us! See you again soon!")
+print("-----------------")
+# 8. The program should be able to process multiple shopping cart items of the same kind, but need 
+# not display any groupings or aggregations of those items (although it may optionally do so).
+

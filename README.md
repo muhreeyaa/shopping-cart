@@ -75,3 +75,4 @@ pip install pandas
 python shopping_cart.py
 ```
 
+### Email Setup

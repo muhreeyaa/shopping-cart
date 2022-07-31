@@ -76,3 +76,9 @@ python shopping_cart.py
 ```
 
 ### Email Setup
+Install the sendgrid package in an active virtual environment.
+ 
+```
+pip install sendgrid
+```
+

@@ -102,7 +102,7 @@ print("-----------------")
 # 5. The total cost of all shopping cart items (i.e. the "subtotal"), formatted as US dollars and cents (e.g. $19.47), 
 # calculated as the sum of their prices
 subtotal = str(total_price)
-print("SUBTOTAL: " + to_usd(float(subtotal)))''
+print("SUBTOTAL: " + to_usd(float(subtotal)))
 
 # 6. The total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount 
 tax = float(subtotal) * (TAX_RATE)
@@ -113,7 +113,6 @@ TAX_RATE=0.0875
 price_total = sales_tax + float(subtotal)
 print("TOTAL: " + to_usd(price_total))
 
-print("-------------------------")
 
 # 7. A friendly message thanking the customer and/or encouraging the customer to shop again
 print("-----------------")
@@ -127,6 +126,16 @@ print("-----------------")
 import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+
+import pandas as pd
+import io
+import requests
+link = "https://raw.githubusercontent.com/prof-rossetti/intro-to-python/master/data/products.csv"
+csv=requests.get(link).content
+df=pd.read_csv(io.StringIO(csv.decode('utf-8')))
+products = df.to_dict(orient='records')
+# This code pulled from https://stackoverflow.com/questions/64187630/creating-a-list-of-dictionaries-from-a-url-that-points-to-a-csv
+# starter code provided in collaboration with Alex Hartley
 
 message = Mail(
     from_email='gjung93@gmail.com',

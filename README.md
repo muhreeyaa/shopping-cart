@@ -70,15 +70,7 @@ pip install -r requirements.txt
 pip install pandas 
 
 ```
-2. Make sure everything is running correctly by running your Python script in Terminal
+2. Make sure everything is running correctly by running the Python script in Terminal
 ```
 python shopping_cart.py
 ```
-
-### Email Setup
-Install the sendgrid package in an active virtual environment.
- 
-```
-pip install sendgrid
-```
-

@@ -4,7 +4,7 @@
 ### Repo Setup
 1. Create new remote project repository called "shopping-cart" on your GitHub online interface and "clone" it onto your desktop. 
 
-2. In Terminal, navigate to your desktop repo using the below command: 
+2. In Terminal, navigate to your desktop repo using the command: 
     ```cd ~/Desktop/shopping-cart```
     
 3. Create a new file in your repo called "shopping_cart.py" and copy the following contents inside:
@@ -52,7 +52,7 @@
 
   print(products)
 ```
-### Environment Setup
+### Setup
 1. Create and activate a new virtual enviornment
 ```
 conda create -n shopping-env python=3.8 
@@ -70,15 +70,9 @@ pip install -r requirements.txt
 pip install pandas 
 
 ```
-2. Make sure everything is running correctly by running your Python script in Terminal
+### Run program
+
+Run the program by typing the below script in Terminal
 ```
 python shopping_cart.py
 ```
-
-### Email Setup
-Install the sendgrid package in an active virtual environment.
- 
-```
-pip install sendgrid
-```
-

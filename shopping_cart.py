@@ -4,7 +4,6 @@ import pandas
 from pandas import read_csv #to read the inventory of products
 
 
-
 products_df = read_csv("products.csv") 
 
 products = [
@@ -61,7 +60,7 @@ total_price = 0
 # for user input
 selected_ids = [] 
 valid_ids = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','done','DONE','Done']
-
+# found that it's easier to list out the valid id's for the desired output
 while True:
     selected_id = input("Please input the correct product ID and type DONE when done:")
     if selected_id.upper() == "DONE":
@@ -77,14 +76,7 @@ while True:
     if not valid_ids:
         print("Oops that's not a valid product ID, please try again.")
         exit()
-
-
-
-
     
-    
-    
-
     # https://www.programiz.com/python-programming/for-loop
     # https://www.programiz.com/python-programming/while-loop
 
@@ -137,4 +129,3 @@ print("Thanks for shopping with us, see you again soon!")
 print("------------------------------")
 # 8. The program should be able to process multiple shopping cart items of the same kind, but need 
 # not display any groupings or aggregations of those items (although it may optionally do so).
-

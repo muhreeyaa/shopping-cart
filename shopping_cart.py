@@ -2,16 +2,8 @@
 from cgi import print_directory
 import pandas 
 from pandas import read_csv #to read the inventory of products
-from dotenv import load_dotenv #setting up the environment
-from sendgrid import SendGridAPIClient #API for email receipt
-from sendgrid.helpers.mail import Mail #for email receipt
 
-import time #importing for timestamp
-import datetime
 
-x = datetime.datetime.now()
-
-load_dotenv()
 
 products_df = read_csv("products.csv") 
 
@@ -54,11 +46,13 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the de
 print("------------------------------")
-print("We have the following", len(products), "products:")
+print("Welcome to Whole Foods")
+
+print("We have the following", len(products), "products for sale:")
 print("------------------------------")
 
 for item in products:
-    print(item["id"], item["name"], to_usd(item["price"]))
+    print(item["id"],".",item["name"],to_usd(item["price"]))
     # print(products)
     # print all the products with prices 
 
@@ -66,35 +60,54 @@ for item in products:
 total_price = 0 
 # for user input
 selected_ids = [] 
-
+valid_ids = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','done','DONE','Done']
 
 while True:
-    selected_id = input("Please input a product identifier (ID) and type DONE when done:")
+    selected_id = input("Please input the correct product ID and type DONE when done:")
     if selected_id.upper() == "DONE":
-        break
+        break 
     else:
-        matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-        matching_product = matching_products[0] 
-        selected_ids.append(matching_product)
-    #if there are no matching products
- 
+        try:
+            matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+            matching_product = matching_products[0]
+            selected_ids.append(matching_product)
+        except: 
+            print("Oops that's not a valid product ID, please try again.")
+
+    if not valid_ids:
+        print("Oops that's not a valid product ID, please try again.")
+        exit()
+
+
+
+
+    
+    
+    
+
+    # https://www.programiz.com/python-programming/for-loop
+    # https://www.programiz.com/python-programming/while-loop
+
 # Receipt 
 # After the clerk indicates there are no more items, the program should print a custom receipt on the screen. 
 # The receipt should include the following components:
 # 1. A grocery store name of your choice
 print("Welcome to Whole Foods")
-print("------------------------------")
 
 # 2. A grocery store phone number and/or website URL and/or address of choice
 print("292 Ashland Pl, Brooklyn, NY 11217")
-print("www.wholefoods.com")
+print("https://www.wholefoodsmarket.com/")
 
 # 3. The date and time of the beginning of the checkout process, 
 # #formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
-print(" (718) 290-1010")
-print ("Time: " + str(datetime.datetime.now()))
+print("(718) 290-1010")
+import time 
+import datetime
+e = datetime.datetime.now()
+#importing for timestamp # https://phoenixnap.com/kb/get-current-date-time-python
+print (e.strftime("%Y-%m-%d %H:%M"))
 print("------------------------------")
-print("Purchased items")
+print("Selected items")
 print("------------------------------")
 
 # 4. The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $3.50, etc.)
@@ -125,23 +138,3 @@ print("------------------------------")
 # 8. The program should be able to process multiple shopping cart items of the same kind, but need 
 # not display any groupings or aggregations of those items (although it may optionally do so).
 
-
-import os
-
-
-link = "https://raw.githubusercontent.com/prof-rossetti/intro-to-python/master/data/products.csv"
-csv=requests.get(link).content
-df=pd.read_csv(io.StringIO(csv.decode('utf-8')))
-products = df.to_dict(orient='records')
-# This code pulled from https://stackoverflow.com/questions/64187630/creating-a-list-of-dictionaries-from-a-url-that-points-to-a-csv
-# starter code provided in collaboration with Alex Hartley
-
-message = Mail(
-    from_email='gjung93@gmail.com',
-    to_emails='gjung93@gmail.com',
-    subject='Here is your receipt',
-    html_content='<strong>and easy to do anywhere, even with Python</strong>')
-
-sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-response = sg.send(message)
-print(response.status_code, response.body, response.headers)

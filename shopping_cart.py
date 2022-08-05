@@ -1,15 +1,14 @@
 # shopping_cart.py
+from cgi import print_directory
 import pandas 
 from pandas import read_csv #to read the inventory of products
-
-
 from dotenv import load_dotenv #setting up the environment
 from sendgrid import SendGridAPIClient #API for email receipt
 from sendgrid.helpers.mail import Mail #for email receipt
 
-import time
+import time #importing for timestamp
 import datetime
-#importing for timestamp
+
 x = datetime.datetime.now()
 
 load_dotenv()
@@ -54,82 +53,82 @@ def to_usd(my_price):
 
 
 # TODO: write some Python code here to produce the de
+print("------------------------------")
+print("We have the following", len(products), "products:")
+print("------------------------------")
+
 for item in products:
     print(item["id"], item["name"], to_usd(item["price"]))
     # print(products)
+    # print all the products with prices 
 
-total_price = 0
+
+total_price = 0 
+# for user input
 selected_ids = [] 
 
 
 while True:
     selected_id = input("Please input a product identifier (ID) and type DONE when done:")
-    if selected_id == "DONE":
+    if selected_id.upper() == "DONE":
         break
-        #break from loop
-    elif int(selected_id) <= 0 or int(selected_id) >= 21:
-        selected_id = input("Oops that was an invalid product ID, please try again. ")
-        selected_ids.append(selected_id)
     else:
-        selected_ids.append(selected_id)
-        # quit 
-
-#After the clerk indicates there are no more items, the program should print a custom receipt on the screen. 
+        matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+        matching_product = matching_products[0] 
+        selected_ids.append(matching_product)
+    #if there are no matching products
+ 
+# Receipt 
+# After the clerk indicates there are no more items, the program should print a custom receipt on the screen. 
 # The receipt should include the following components:
 # 1. A grocery store name of your choice
 print("Welcome to Whole Foods")
-print("-----------------")
+print("------------------------------")
 
 # 2. A grocery store phone number and/or website URL and/or address of choice
 print("292 Ashland Pl, Brooklyn, NY 11217")
+print("www.wholefoods.com")
 
 # 3. The date and time of the beginning of the checkout process, 
 # #formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
 print(" (718) 290-1010")
 print ("Time: " + str(datetime.datetime.now()))
-print("-----------------")
+print("------------------------------")
 print("Purchased items")
-print("-----------------")
+print("------------------------------")
 
 # 4. The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $3.50, etc.)
 for selected_id in selected_ids:
-    matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-    matching_product = matching_products[0]
-    total_price = total_price + matching_product["price"]
-    print("#>SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
-print("-----------------")
+    print("... " +selected_id["name"],"...", "(",to_usd(selected_id["price"]),")")
+print("------------------------------")
+
 
 # 5. The total cost of all shopping cart items (i.e. the "subtotal"), formatted as US dollars and cents (e.g. $19.47), 
 # calculated as the sum of their prices
-subtotal = str(total_price)
-print("SUBTOTAL: " + to_usd(float(subtotal)))
+subtotal = sum(item["price"] for item in selected_ids)
+print("SUBTOTAL:", to_usd(subtotal))
 
 # 6. The total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount 
-tax = float(subtotal) * (TAX_RATE)
+TAX_RATE = 0.0875
+tax = subtotal * TAX_RATE
 print("SALES TAX (8.75%):", to_usd(tax))
 # of tax owed plus the total cost of all shopping cart items
-TAX_RATE=0.0875
 
-price_total = sales_tax + float(subtotal)
+price_total = tax + subtotal
 print("TOTAL: " + to_usd(price_total))
 
 
 # 7. A friendly message thanking the customer and/or encouraging the customer to shop again
-print("-----------------")
-print("Thanks for shopping with us! See you again soon!")
-print("-----------------")
+print("------------------------------")
+print("Thanks for shopping with us, see you again soon!")
+print("------------------------------")
 # 8. The program should be able to process multiple shopping cart items of the same kind, but need 
 # not display any groupings or aggregations of those items (although it may optionally do so).
 
 
-
 import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 
-import pandas as pd
-import io
-import requests
+
 link = "https://raw.githubusercontent.com/prof-rossetti/intro-to-python/master/data/products.csv"
 csv=requests.get(link).content
 df=pd.read_csv(io.StringIO(csv.decode('utf-8')))

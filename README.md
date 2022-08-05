@@ -52,7 +52,7 @@
 
   print(products)
 ```
-### Environment Setup
+### Setup
 1. Create and activate a new virtual enviornment
 ```
 conda create -n shopping-env python=3.8 
@@ -70,7 +70,9 @@ pip install -r requirements.txt
 pip install pandas 
 
 ```
-2. Make sure everything is running correctly by running the Python script in Terminal
+### Run program
+
+Run the program by typing the below script in Terminal
 ```
 python shopping_cart.py
 ```

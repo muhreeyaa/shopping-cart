@@ -4,7 +4,7 @@
 ### Repo Setup
 1. Create new remote project repository called "shopping-cart" on your GitHub online interface and "clone" it onto your desktop. 
 
-2. In Terminal, navigate to your desktop repo using the below command: 
+2. In Terminal, navigate to your desktop repo using the command: 
     ```cd ~/Desktop/shopping-cart```
     
 3. Create a new file in your repo called "shopping_cart.py" and copy the following contents inside:
